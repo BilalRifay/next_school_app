@@ -1,0 +1,28 @@
+import { z } from 'zod';
+
+export const schema = z.object({
+  studentName: z.string().min(1, 'Student Name is required'),
+  dob: z.string().min(1, 'Date of Birth is required'),
+  grade: z.string().min(1, 'Grade is required'),
+  gender: z.string().min(1, 'Gender is required'),
+  nationality: z.string().min(1, 'Nationality is required'),
+  religion: z.string().optional(),
+  caste: z.string().optional(),
+  community: z.string().min(1, 'Community is required'),
+  board: z.string().min(1, 'Board is required'),
+  currentSchool: z.string().min(1, 'Current School is required'),
+  email: z.string().email('Invalid email address').min(1, 'Email is required'),
+  address: z.string().min(1, 'Address is required'),
+  siblings: z.string().min(1, 'Siblings information is required'),
+  fatherName: z.string().min(1, 'Father\'s Name is required'),
+  fatherQualification: z.string().min(1, 'Father\'s Qualification is required'),
+  fatherMobile: z.string().min(1, 'Father\'s Mobile Number is required'),
+  fatherOccupation: z.string().min(1, 'Father\'s Occupation is required'),
+  fatherIncome: z.string().min(1, 'Father\'s Income is required'),
+  motherName: z.string().min(1, 'Mother\'s Name is required'),
+  motherQualification: z.string().min(1, 'Mother\'s Qualification is required'),
+  motherMobile: z.string().min(1, 'Mother\'s Mobile Number is required'),
+  motherOccupation: z.string().min(1, 'Mother\'s Occupation is required'),
+  motherIncome: z.string().min(1, 'Mother\'s Income is required'),
+  documentUpload: z.string().optional(),
+});

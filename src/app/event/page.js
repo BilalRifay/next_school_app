@@ -9,26 +9,26 @@ import { useInView } from 'react-intersection-observer';
 const EventPage = () => {
   const { t } = useTranslation();
 
-  
+
   let events = t('events', { returnObjects: true });
   if (!Array.isArray(events)) {
     console.error('Events data is not an array:', events);
     events = [];
   }
 
-  
+
   const currentDate = moment().startOf('day');
   const pastEvents = events.filter(event => moment(event.date).isBefore(currentDate));
   const upcomingEvents = events.filter(event => moment(event.date).isAfter(currentDate));
 
-  
+
   const EventSection = ({ title, description, images }) => {
     const { ref, inView } = useInView({
       triggerOnce: true,
       threshold: 0.2,
     });
 
-    
+
     const validImages = Array.isArray(images) ? images : [];
 
     return (
@@ -90,7 +90,21 @@ const EventPage = () => {
           Explore our past and upcoming events where students engage, learn, and celebrate various academic, cultural, and extracurricular activities.
         </p>
       </div>
-
+      <div>
+        <h2 className="text-4xl font-bold text-center mb-8">Upcoming Events</h2>
+        {upcomingEvents.length === 0 ? (
+          <p className="text-center">No upcoming events.</p>
+        ) : (
+          upcomingEvents.map((event, index) => (
+            <EventSection
+              key={index}
+              title={event.title}
+              description={event.description}
+              images={event.images || []}
+            />
+          ))
+        )}
+      </div>
       {/* Past Events */}
       <div>
         <h2 className="text-4xl font-bold text-center mb-8">Past Events</h2>
@@ -109,21 +123,7 @@ const EventPage = () => {
       </div>
 
       {/* Upcoming Events */}
-      <div>
-        <h2 className="text-4xl font-bold text-center mb-8">Upcoming Events</h2>
-        {upcomingEvents.length === 0 ? (
-          <p className="text-center">No upcoming events.</p>
-        ) : (
-          upcomingEvents.map((event, index) => (
-            <EventSection
-              key={index}
-              title={event.title}
-              description={event.description}
-              images={event.images || []}
-            />
-          ))
-        )}
-      </div>
+
 
       {/* Carousel Section */}
       <div

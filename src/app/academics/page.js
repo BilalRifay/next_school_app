@@ -3,15 +3,12 @@
 import { useTranslation } from "react-i18next";
 
 const Card = ({ title, description, extraClasses = '', children }) => (
-    <div
-        className={`bg-white text-gray-800 p-6 rounded-lg shadow-lg transform transition-transform duration-500 ${extraClasses}`}
-    >
+    <div className={`bg-white text-gray-800 p-6 rounded-lg shadow-lg transform transition-transform duration-500 ${extraClasses}`}>
         <h3 className="text-2xl md:text-xl font-bold mb-3">{title}</h3>
         <p className="text-sm">{description}</p>
         {children}
     </div>
 );
-
 
 const ImageCard = ({ src, alt, label }) => (
     <div className="relative overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-500">
@@ -22,7 +19,6 @@ const ImageCard = ({ src, alt, label }) => (
     </div>
 );
 
-
 const Section = ({ title, children, extraClasses = '' }) => (
     <div className={`container mx-auto py-8 px-4 md:px-8 ${extraClasses}`}>
         <h2 className="text-xl md:text-3xl font-bold mb-6 text-center">{title}</h2>
@@ -32,9 +28,7 @@ const Section = ({ title, children, extraClasses = '' }) => (
 
 export default function Academics() {
     const { t } = useTranslation();
-
     const ImageLink = t("academicimage", { returnObjects: true });
-
 
     return (
         <div className="min-h-screen bg-blue-800/80 text-white">
@@ -62,13 +56,11 @@ export default function Academics() {
                             alt="Campus_Image-1"
                             label={t('academics.campusLife.imageCards.0.label')}
                         />
-
                         <ImageCard
                             src={t('academicimage.image1')}
                             alt="Campus_Image-2"
                             label={t('academics.campusLife.imageCards.1.label')}
                         />
-
                     </div>
                 </div>
             </Section>
@@ -103,13 +95,62 @@ export default function Academics() {
                 </div>
             </Section>
 
-            {/* Navigation Links */}
+            {/* School Information Section */}
+            <Section title={t('academics.schoolInfo.sectionTitle')} extraClasses="bg-white text-gray-800">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <Card
+                        title={t('academics.schoolInfo.levelOfSchooling.title')}
+                        description={t('academics.schoolInfo.levelOfSchooling.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.curriculum.title')}
+                        description={t('academics.schoolInfo.curriculum.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.mediumOfInstruction.title')}
+                        description={t('academics.schoolInfo.mediumOfInstruction.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.genderComposition.title')}
+                        description={t('academics.schoolInfo.genderComposition.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.managedBy.title')}
+                        description={t('academics.schoolInfo.managedBy.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.schoolType.title')}
+                        description={t('academics.schoolInfo.schoolType.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.campusInfo.title')}
+                        description={t('academics.schoolInfo.campusInfo.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.studentsInfo.title')}
+                        description={t('academics.schoolInfo.studentsInfo.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.teachersInfo.title')}
+                        description={t('academics.schoolInfo.teachersInfo.description')}
+                    />
+                    <Card
+                        title={t('academics.schoolInfo.schoolFacilities.title')}
+                        description={t('academics.schoolInfo.schoolFacilities.description')}
+                    />
+                </div>
+            </Section>
+
+            {/* Campus Images */}
             <h2 className="text-center font-semibold text-xl pt-2">Campus Images</h2>
             <div className="text-center py-8 px-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                
-                {Object.values(ImageLink).map((img, index) => (
-                    <div key={index}>
-                        <img src={img} alt={`Image ${index + 1}`} className="w-full h-auto" />
+                {Object.values(ImageLink).slice(0, 8).map((img, index) => (
+                    <div key={index} className="w-full h-48 overflow-hidden">
+                        <img
+                            src={img}
+                            alt={`Image ${index + 1}`}
+                            className="w-full h-full object-cover rounded-xl"
+                        />
                     </div>
                 ))}
             </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from "react";
-import CurriculumPage from "@/app/PageComponents/Curriculum";
 import { useTranslation } from 'react-i18next';
 import { loadTranslations } from '../utils/i18n';
 
@@ -15,9 +14,6 @@ export default function Home() {
     initializeTranslations();
   }, [i18n.language]);
   return (
-    <div>
-      <CurriculumPage />
-    </div>
-
+ 
   );
 }

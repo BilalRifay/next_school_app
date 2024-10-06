@@ -1,12 +1,13 @@
 "use client";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { loadTranslations } from "../utils/i18n"
+import { loadTranslations } from "../utils/i18n";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
-
+import { usePathname } from "next/navigation";
+import { AuthProvider } from "../context/authContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,23 +27,36 @@ const geistMono = localFont({
 
 export default function RootLayout({ children }) {
   const { i18n } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
+
   useEffect(() => {
     const initializeTranslations = async () => {
-      await loadTranslations(i18n.language || 'en');
+      await loadTranslations(i18n.language || "en");
+      setIsLoading(false);
     };
 
     initializeTranslations();
   }, [i18n.language]);
+
+  const isAuthRoute = ["/admin", "/teacher", "/student", "/auth"].some((path) =>
+    pathname.startsWith(path)
+  );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
-          <Navbar />
+        <AuthProvider>
+          {!isAuthRoute && <Navbar />}
           {children}
-          <Footer />
-        
+          {!isAuthRoute && <Footer />}
+        </AuthProvider>
       </body>
     </html>
   );

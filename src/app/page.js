@@ -6,6 +6,7 @@ import Testimonials from "../components/pageComponents/Testimonials";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import PopupPage from "../components/pageComponents/PopupPage";
+import Image from "next/image";
 
 const HeroPage = () => {
   const { t } = useTranslation();

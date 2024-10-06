@@ -15,7 +15,7 @@ const EventPage = () => {
     console.error("Events data is not an array:", events);
     events = [];
   }
-
+console.log(events)
   const currentDate = moment().startOf("day");
   const pastEvents = events.filter((event) =>
     moment(event.date).isBefore(currentDate)
